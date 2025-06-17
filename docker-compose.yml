@@ -2,10 +2,10 @@ version: '3'
 
 services: 
 
-  back-end:
+  backend:
     build: 
       context: backend
-    container_name: back-end
+    container_name: backend
     working_dir: /usr/src/app
     networks: 
       - node-network
@@ -18,11 +18,12 @@ services:
     command: npm run start
     depends_on:
        - db
+    user: 'docker'
 
-  front-end:
+  frontend:
     build: 
       context: frontend
-    container_name: front-end
+    container_name: frontend
     working_dir: /usr/src/app
     networks: 
       - node-network
@@ -59,8 +60,8 @@ services:
     networks: 
       - node-network
     depends_on:
-       - back-end
-       - front-end
+       - backend
+       - frontend
   
 networks: 
   node-network:
